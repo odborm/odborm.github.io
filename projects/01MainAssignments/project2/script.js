@@ -51,7 +51,7 @@ function moveButton() {
 
 // Controlla se il mouse clicca sul bottone
 function mousePressed() {
-  fill (255,0,0)
+  
   let d = dist(mouseX, mouseY, buttonPosition.x, buttonPosition.y);
   if (d < 75) {
     displayText = "BEWARE OF SCAM!"; // Cambia il testo
