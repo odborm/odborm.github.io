@@ -1,41 +1,63 @@
-let x = 0;
-let y = 0;
-let y2 = 600 
-let dia = 0;
-let gap = 100 
+let buttonPosition;
+let targetPosition;
+let displayText = "congratulations you won a free vacation!"; // Testo iniziale
 
 function setup() {
-  createCanvas(600, 600);
-	background(0);
-	// noStroke();	
+  createCanvas(windowWidth, windowHeight); // Canvas a pieno schermo
+  textAlign(CENTER, CENTER);
+  rectMode(CENTER);
+
+  // Posizione iniziale del bottone
+  buttonPosition = createVector(width / 2, height / 2 + 100);
+  targetPosition = buttonPosition.copy(); // Il target coincide inizialmente con la posizione
 }
 
 function draw() {
-	background(0, 50);
+  background(255);
 
- for (let i = 0; i <= width - gap; i += gap) {
+  // Testo principale
+  fill(0);
+  textSize(24);
+  text(displayText, width / 2, height / 2 - 50);
 
-    if (i % (gap * 2) == 0) {
-      noFill()
-      stroke(255)
-      circle(i+ dia/2 + 15, y, dia);
-    } else {
-      fill(255)
-      circle(i+ dia/2 + 15, y2, dia);
-    }
+  // Disegna il bottone
+  drawButton(buttonPosition.x, buttonPosition.y, "Claim Prize");
 
-    if (frameCount % 10 == 0 && dia <= 70) {
-      dia++
-    }
+  // Movimento fluido del bottone verso la nuova posizione
+  buttonPosition.lerp(targetPosition, 0.1);
 
+  // Controlla la distanza tra il mouse e il bottone
+  let d = dist(mouseX, mouseY, buttonPosition.x, buttonPosition.y);
+  if (d < 75) {
+    moveButton(); // Cambia posizione del bottone
   }
+}
 
-  y+=3
-  y2-=3
-	
-	y = (y + height) % height;
-  if ((y + height)% height == 0) {
-    dia = 0
+// Funzione per disegnare il bottone
+function drawButton(x, y, label) {
+  fill(100, 200, 255);
+  stroke(0);
+  rect(x, y, 150, 50, 10);
+  fill(0);
+  textSize(16);
+  text(label, x, y);
+}
+
+// Cambia la posizione del bottone in modo casuale ma entro i limiti dello schermo
+function moveButton() {
+  targetPosition.x = random(100, width - 100);
+  targetPosition.y = random(100, height - 100);
+}
+
+// Controlla se il mouse clicca sul bottone
+function mousePressed() {
+  fill (255,0,0)
+  let d = dist(mouseX, mouseY, buttonPosition.x, buttonPosition.y);
+  if (d < 75) {
+    displayText = "BEWARE OF SCAM!"; // Cambia il testo
   }
-  y2 = (y2 + height) % height;
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight); // Ridimensiona il canvas dinamicamente
 }
