@@ -1,16 +1,16 @@
-let cols = 10; // Numero di colonne
-let rows = 10; // Numero di righe
+let cols = 10;  //colonne
+let rows = 10; //righe
 let spacing = 100; // Spaziatura tra le lettere
-let letterTexture; // Texture per il rendering del testo
+let letterTexture; //
 let letters = []; // Array per memorizzare le lettere attuali
-let targetLetters = []; // Array per le lettere di destinazione
+let targetLetters = []; // 
 let specialPositions = []; // Posizioni delle lettere "ZHDK"
-let changing = false; // Flag per indicare se le lettere stanno cambiando
+let changing = false; 
 let changeStartTime; // Tempo di inizio del cambio
-let changeDuration = 2000; // Durata del cambio (in millisecondi)
+let changeDuration = 2000; 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL); // Canvas che si adatta alla finestra
+  createCanvas(windowWidth, windowHeight, WEBGL); 
 
   // Crea una texture per il rendering del testo
   letterTexture = createGraphics(200, 200);
@@ -32,7 +32,7 @@ function setup() {
 }
 
 function draw() {
-  background(25); // Sfondo nero
+  background(25); 
   rotateX(map(mouseY, 0, height, -PI / 6, PI / 6)); //  verticale
   rotateY(map(mouseX, 0, width, -PI / 6, PI / 6));  //  orizzontale
 
@@ -91,7 +91,7 @@ function mousePressed() {
   changeStartTime = millis();
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      targetLetters[i][j] = char(floor(random(65, 91))); // Nuove lettere di destinazione
+      targetLetters[i][j] = char(floor(random(65, 91))); 
     }
   }
   assignZHDP(); // Reimposta la parola "ZHDK"
@@ -120,5 +120,5 @@ function assignZHDP() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight); // Ridimensiona il canvas dinamicamente
+  resizeCanvas(windowWidth, windowHeight); 
 }
